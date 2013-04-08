@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.jquery-dice {
+  width: 580px;
+  margin: 20px auto 0;
+  padding: 10px 0px 0px 10px;
+
+  border: 1px solid #ccc;
+  background-color: #eee;
+
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.jquery-dice-player {
+  width: 161px;
+  padding: 10px;
+
+  display: inline-block;
+
+  border: 1px solid #ccc;
+  background-color: #ddd;
+
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+
+  margin: 0px 10px 10px 0px;
+}
+
+.jquery-dice-player-dices {
+  margin-top: 10px;
+}
+
+.jquery-dice-player-dices-dice {
+  padding: 20px;
+  width: 0px;
+  height: 0px;
+
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  display: inline-block;
+
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.jquery-dice-click {
+  cursor: pointer;
+}
+
+.jquery-dice-winner {
+  background-color: red;
+}
+
+.jquery-dice-player-result {
+  font-weight: bold;
+  float: right;
+  display: block;
+}
