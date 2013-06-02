@@ -1,9 +1,13 @@
 /**
+ * @file
  * jQuery Dice
  *
- * jQuery Plugin by Christian Hanne (www.christianhanne.de), 2012
+ * This is a pretty simple plugin that turns any container into a customizable dice game.
  *
- * This is a pretty simple plugin that turns any container into a dice game.
+ * @author Christian Hanne <mail@christianhanne.de>
+ * @version 0.9.0
+ * @link http://www.christianhanne.de
+ * @link http://demo.christianhanne.de/jquery_dice
  *
  * These settings may be changed.
  *
@@ -36,28 +40,28 @@
       'maxSpots'      : 6,
       'trickReaction' : 'reroll',
       'rollDice'      :  function() {
-        return parseInt(Math.random() * settings.maxSpots);
+        return parseInt(Math.random() * settings.maxSpots, 10);
       }
     }, options);
 
     var rollDices = function(dice) {
-      if (!dice.hasClass('jquery-dice-click')) {
+      if (!dice.hasClass('dice-click')) {
          return;
        }
 
       var maxResult = 0;
-      $('.jquery-dice-player', dice).not('.processed').each(function() {
+      $('.dice-player', dice).not('.processed').each(function() {
         var playerResult = 0;
 
-        $('.jquery-dice-player-dices-dice', this).not('.processed').each(function() {
+        $('.dice-player-dices-dice', this).not('.processed').each(function() {
           var diceResult = settings.rollDice();
           $(this).addClass('processed').html(diceResult);
 
           playerResult+= diceResult;
         });
 
-        $(this).addClass('jquery-dice-player-result-' + playerResult);
-        $('.jquery-dice-player-result', this).html(playerResult);
+        $(this).addClass('dice-player-result-' + playerResult);
+        $('.dice-player-result', this).html(playerResult);
 
         $(this).addClass('processed');
 
@@ -71,36 +75,36 @@
     };
 
     var processResult = function(dice, result) {
-      if (settings.trickReaction == 'reroll' && $('.jquery-dice-player-result-' + result, dice).size() > 1) {
-        $('.jquery-dice-player-result-' + result, dice).removeClass('processed');
-        $('.jquery-dice-player-result-' + result, dice).removeClass('.jquery-dice-player-result-' + result);
-        $('.jquery-dice-player-result-' + result + ' .jquery-dice-player-dices-dice', dice).removeClass('processed');
+      if (settings.trickReaction == 'reroll' && $('.dice-player-result-' + result, dice).size() > 1) {
+        $('.dice-player-result-' + result, dice).removeClass('processed');
+        $('.dice-player-result-' + result, dice).removeClass('.dice-player-result-' + result);
+        $('.dice-player-result-' + result + ' .dice-player-dices-dice', dice).removeClass('processed');
 
         rollDices(dice);
       }
       else {
-        $('.jquery-dice-player-result-' + result, dice).addClass('jquery-dice-winner');
+        $('.dice-player-result-' + result, dice).addClass('dice-winner');
 
         // Remove click class.
-        dice.removeClass('jquery-dice-click');
+        dice.removeClass('dice-click');
       }
     };
 
     return this.each(function() {
       // Add a class to mark this container as a dice game.
-      $(this).addClass('jquery-dice jquery-dice-click');
+      $(this).addClass('dice dice-click');
 
       // Add container for each player.
       for (var i = 0; i < settings.numPlayers; i++) {
-        var $player = $('<div/>').addClass('jquery-dice-player jquery-dice-player-' + i);
-        $('<div/>').addClass('jquery-dice-player-name').html('Player ' + (i + 1)).appendTo($player);
-        $('<span/>').addClass('jquery-dice-player-result').appendTo($('.jquery-dice-player-name', $player));
+        var $player = $('<div/>').addClass('dice-player dice-player-' + i);
+        $('<div/>').addClass('dice-player-name').html('Player ' + (i + 1)).appendTo($player);
+        $('<span/>').addClass('dice-player-result').appendTo($('.dice-player-name', $player));
 
-        $('<div/>').addClass('jquery-dice-player-dices').appendTo($player);
+        $('<div/>').addClass('dice-player-dices').appendTo($player);
 
         for (var j = 0; j < settings.numDices; j++) {
-          $('<div/>').addClass('jquery-dice-player-dices-dice jquery-dice-player-dices-dice-' + j)
-            .appendTo($('.jquery-dice-player-dices', $player));
+          $('<div/>').addClass('dice-player-dices-dice dice-player-dices-dice-' + j)
+            .appendTo($('.dice-player-dices', $player));
         }
 
         $player.appendTo($(this));
